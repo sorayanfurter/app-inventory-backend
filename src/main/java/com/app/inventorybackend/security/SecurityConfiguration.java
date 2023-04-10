@@ -1,5 +1,6 @@
 package com.app.inventorybackend.security;
 
+import com.app.inventorybackend.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class SecurityConfiguration {
 
  @Autowired
-   private UserDetailsService userDetailsService;
+   private UserDetailsServiceImpl userDetailsServiceImpl;
 
  @Autowired
  private AuthenticationEntryPoint authenticationEntryPoint;
@@ -38,7 +39,7 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.eraseCredentials(false)
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsServiceImpl)
                 .passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
@@ -50,7 +51,7 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**", "/api/users/")
+                .requestMatchers("/api/auth/login", "/api/users/")
                 .permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest()

@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    AuthenticationService service;
+    private AuthenticationService authservice;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(authservice.authenticate(request));
     }
 }

@@ -1,5 +1,6 @@
 package com.app.inventorybackend.auth;
 
+import com.app.inventorybackend.exceptions.EmailNotFoundException;
 import com.app.inventorybackend.security.JwtService;
 import com.app.inventorybackend.repository.UserRepository;
 import com.app.inventorybackend.service.UserDetailsServiceImpl;
@@ -32,14 +33,14 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-       if(userDetailsServiceImpl.loadUserByUsername(request.getEmail())== null) {
-           throw new UsernameNotFoundException("Email not found");
-       }
-       UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(request.getEmail());
-        var jwtToken = jwtService.generateToken(userDetails);
 
-        return  AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        if(request.getEmail() == null) {
+            throw new EmailNotFoundException("Email not found");
+        }
+
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(request.getEmail());
+        String jwtToken = jwtService.generateToken(userDetails);
+
+        return  new AuthenticationResponse(jwtToken);
     }
 }
