@@ -4,14 +4,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
 import java.io.Serializable;
 
 
 @Data
 @AllArgsConstructor
 public class UserRegisterDTO implements Serializable {
-
 
     @NotNull
     String name;
@@ -21,6 +19,5 @@ public class UserRegisterDTO implements Serializable {
     String password;
     @NotNull
     String email;
-
-
+    
 }

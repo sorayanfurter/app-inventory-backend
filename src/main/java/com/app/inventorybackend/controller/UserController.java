@@ -26,11 +26,14 @@ public class UserController {
      * @param user UserRegisterDTO
      * @return UserDTO
      */
+
     @PostMapping("/")
+
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserRegisterDTO user){
         UserDTO u = service.registerUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(u);
     }
+
 
     /**
      * Este metodo obtiene un usuario por su id
@@ -52,5 +55,5 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllUsers());
     }
 
-
 }
+

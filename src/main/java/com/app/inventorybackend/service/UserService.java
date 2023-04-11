@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class UserService {
     @Autowired
     UserRepository repo;
     @Autowired
     RoleRepository roleRepo;
+
 
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10,new SecureRandom());
@@ -59,8 +59,8 @@ public class UserService {
 
 
 
-    }
 
+    }
 
     public List<UserDTO>  getAllUsers(){
         List<User> users = repo.findAll();
@@ -70,13 +70,6 @@ public class UserService {
         }
         return usersDTO;
     }
-
-
-
-
-
-
-
 
 
 }
