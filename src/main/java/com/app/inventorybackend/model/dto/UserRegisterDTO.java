@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+
 @Data
 @AllArgsConstructor
 public class UserRegisterDTO implements Serializable {
@@ -18,5 +19,5 @@ public class UserRegisterDTO implements Serializable {
     String password;
     @NotNull
     String email;
-
+    
 }

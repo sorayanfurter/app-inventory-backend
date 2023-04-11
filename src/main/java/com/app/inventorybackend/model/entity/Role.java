@@ -12,3 +12,4 @@ public class Role {
     @Column(unique = true)
     String name;
 }
+

@@ -1,5 +1,6 @@
 package com.app.inventorybackend.model.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,5 +15,6 @@ public class UserDTO implements Serializable {
     String surname;
     String email;
     String role;
+
 
 }
