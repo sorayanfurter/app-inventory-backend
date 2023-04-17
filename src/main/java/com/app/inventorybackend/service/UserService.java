@@ -23,13 +23,11 @@ public class UserService {
     @Autowired
     RoleRepository roleRepo;
 
-
-
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10,new SecureRandom());
 
 
     @Transactional
-    public UserDTO registerUser (UserRegisterDTO user){
+    public User registerUser (UserRegisterDTO user){
         User u = new User();
         u.setName(user.getName());
         u.setSurname(user.getSurname());
@@ -39,36 +37,25 @@ public class UserService {
         // Set role to user
         u.setRole(roleRepo.findById(1).get());
         User created = repo.save(u);
-        return new UserDTO(created.getId(),created.getName(),created.getSurname(),created.getEmail(),created.getRole().getName());
+        return created;
 
 
     }
 
 
-    public UserDTO getUserById(String id){
-
-
+    public User getUserById(String id){
         Optional<User> repoResponse = repo.findById(id);
         if(repoResponse.isPresent()){
             User u = repoResponse.get();
-            return new UserDTO(u.getId(),u.getName(),u.getSurname(),u.getEmail(),u.getRole().getName());
-        }else{
+            return u;
+        }else {
             return null;
         }
-
-
-
-
-
     }
 
-    public List<UserDTO>  getAllUsers(){
+    public List<User>  getAllUsers(){
         List<User> users = repo.findAll();
-        List <UserDTO> usersDTO = new ArrayList<>();
-        for(User u : users){
-            usersDTO.add(new UserDTO(u.getId(),u.getName(),u.getSurname(),u.getEmail(),u.getRole().getName()));
-        }
-        return usersDTO;
+        return users;
     }
 
 
